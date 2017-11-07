@@ -4,37 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hellvox.kappetijnmathijspset2.Main3Activity">
+    tools:context="com.example.hellvox.kappetijnmathijspset2.Main3Activity"
+    tools:layout_editor_absoluteY="73dp">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="364dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_width="463dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
-        android:layout_marginEnd="109dp"
-        android:layout_marginRight="109dp"
-        android:layout_marginStart="109dp"
-        android:layout_marginLeft="109dp"
-        android:layout_marginTop="42dp"
+        android:layout_width="89dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="115dp"
         android:onClick="goToFirstScreen"
         android:text="@string/lastButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

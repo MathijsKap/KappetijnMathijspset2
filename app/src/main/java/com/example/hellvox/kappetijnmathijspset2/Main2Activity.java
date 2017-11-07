@@ -95,4 +95,18 @@ public class Main2Activity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        button.setVisibility(savedInstanceState.getInt("Button Visibility"));
+        nextwordtype.setVisibility(savedInstanceState.getInt("Wordtype Visibility"));
+        wordsleft.setVisibility(savedInstanceState.getInt("Wordsleft Visibility"));
+        button2.setVisibility(savedInstanceState.getInt("Button2 Visibility"));
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt("Button Visibility", button.getVisibility());
+        savedInstanceState.putInt("Wordtype Visibility", nextwordtype.getVisibility());
+        savedInstanceState.putInt("Wordsleft Visibility", wordsleft.getVisibility());
+        savedInstanceState.putInt("Button2 Visibility", button2.getVisibility());
+        super.onSaveInstanceState(savedInstanceState);
+    }
 }

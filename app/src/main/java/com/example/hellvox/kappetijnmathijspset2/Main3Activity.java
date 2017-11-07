@@ -20,7 +20,7 @@ public class Main3Activity extends AppCompatActivity {
         textView.setText(finalStory.toString());
     }
 
-    public void goToSecondScreen(View View) {
+    public void goToFirstScreen(View View) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
