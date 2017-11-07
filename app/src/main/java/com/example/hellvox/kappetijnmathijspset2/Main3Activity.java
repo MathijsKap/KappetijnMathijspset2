@@ -13,10 +13,10 @@ public class Main3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
 
         Intent intent = getIntent();
-        String receivedText = intent.getStringExtra("ourText");
+        Story finalStory = (Story) intent.getSerializableExtra("finalStory");
 
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(receivedText);
+        textView.setText(finalStory.toString());
     }
 
 }

@@ -6,4 +6,7 @@
     <string name="home_image">HomeImage</string>
     <string name="start_button">GET STARTED!</string>
     <string name="homebutton">GET STARTED!</string>
+    <string name="secondScreenText">Fill in the words to complete the story</string>
+    <string name="ok">OK</string>
+    <string name="lastButton">Try another story</string>
 </resources>
