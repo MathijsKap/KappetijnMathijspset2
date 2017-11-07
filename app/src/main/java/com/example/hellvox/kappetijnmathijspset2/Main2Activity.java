@@ -1,15 +1,25 @@
 package com.example.hellvox.kappetijnmathijspset2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity {
 
+    String libsleftstring;
+    int libsleft;
     Story tempStory;
+    TextView wordsleft;
+    EditText nextwordtype;
+    Button button, button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,23 +29,69 @@ public class Main2Activity extends AppCompatActivity {
 
         tempStory = (Story) intent.getSerializableExtra("theStory");
 
-        EditText nextwordtype = findViewById(R.id.editText);
+        button = findViewById(R.id.button);
+        button2 = findViewById(R.id.button2);
+        nextwordtype = findViewById(R.id.editText);
+        wordsleft = findViewById(R.id.wordsleft);
+
+        Context context = getApplicationContext();
+        CharSequence text = "Keep going!";
+        int duration = Toast.LENGTH_SHORT;
+        final Toast toast = Toast.makeText(context, text, duration);
+        CharSequence text2 = "That was the last one, click 'show story' for your story!";
+        int duration2 = Toast.LENGTH_LONG;
+        final Toast toast2 = Toast.makeText(context, text2, duration2);
+
+
+        libsleft = tempStory.getPlaceholderRemainingCount();
+        libsleftstring = libsleft + " word(s) left";
+        wordsleft.setText(libsleftstring);
         nextwordtype.setHint(tempStory.getNextPlaceholder());
 
-        TextView wordsleft = findViewById(R.id.wordsleft);
-        int libsleft = tempStory.getPlaceholderRemainingCount();
-        String temp = libsleft + " word(s) left";
-        wordsleft.setText(temp);
+        nextwordtype.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (tempStory.getPlaceholderRemainingCount() > 1) {
+                    button.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            toast.show();
+                            String text = nextwordtype.getText().toString();
+                            tempStory.fillInPlaceholder(text);
+                            nextwordtype.setText("");
+                            libsleft = tempStory.getPlaceholderRemainingCount();
+                            libsleftstring = libsleft + " word(s) left";
+                            wordsleft.setText(libsleftstring);
+                            nextwordtype.setHint(tempStory.getNextPlaceholder());
+                        }
+                    });
+                }
+                if (tempStory.getPlaceholderRemainingCount() == 1) {
+                    button.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            toast2.show();
+                            String text = nextwordtype.getText().toString();
+                            tempStory.fillInPlaceholder(text);
+                            nextwordtype.setText("");
+                            button2.setVisibility(View.VISIBLE);
+                            button.setVisibility(View.INVISIBLE);
+                            nextwordtype.setVisibility(View.INVISIBLE);
+                            wordsleft.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                }
+            }
+        });
     }
+
     public void goToThirdScreen(View View) {
-
-        EditText editText = findViewById(R.id.editText);
-        String text = editText.getText().toString();
-
         Intent intent = new Intent(this, Main3Activity.class);
         intent.putExtra("finalStory", tempStory);
-
         startActivity(intent);
         finish();
     }

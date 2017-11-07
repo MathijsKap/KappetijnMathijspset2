@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="278dp"
-        android:layout_height="256dp"
+        android:layout_width="266dp"
+        android:layout_height="177dp"
         android:layout_marginEnd="53dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="16dp"
@@ -42,13 +42,26 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="213dp"
-        android:layout_marginLeft="213dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="97dp"
+        android:onClick="goToSecondScreen"
         android:text="@string/homebutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="155dp"
+        android:layout_height="61dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="97dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="goToSecondScreen"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 </android.support.constraint.ConstraintLayout>
