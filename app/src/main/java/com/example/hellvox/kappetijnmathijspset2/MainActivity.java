@@ -15,6 +15,7 @@ import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    // Initialize variables
     InputStream stream;
     Spinner spinner;
     String story;
@@ -27,14 +28,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinner.setOnItemSelectedListener(this);
     }
 
+    // Code to initialize spinner from Google Developers
     public void additemsonspinner() {
         spinner = findViewById(R.id.spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.spinner, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
     }
 
@@ -43,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    // Code to go to the second screen and construct the selected story.
     public void goToSecondScreen(View View) {
         try {
             stream = new ByteArrayInputStream(story.getBytes(Charset.forName("UTF-8").name()));
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         intent.putExtra("theStory", newStory);
         startActivity(intent);
     }
+
+    // All the stories which can be chosen from the spinner.
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         switch (position) {
             case 0:

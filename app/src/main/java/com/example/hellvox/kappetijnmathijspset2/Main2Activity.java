@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity {
 
+    // Initialize variables
     String libsleftstring;
     int libsleft;
     Story tempStory;
@@ -29,11 +30,13 @@ public class Main2Activity extends AppCompatActivity {
 
         tempStory = (Story) intent.getSerializableExtra("theStory");
 
+        // Get all the correct elements into the variables.
         button = findViewById(R.id.button);
         button2 = findViewById(R.id.button2);
         nextwordtype = findViewById(R.id.editText);
         wordsleft = findViewById(R.id.wordsleft);
 
+        // Create the toast messages
         Context context = getApplicationContext();
         CharSequence text = "Keep going!";
         int duration = Toast.LENGTH_SHORT;
@@ -42,12 +45,14 @@ public class Main2Activity extends AppCompatActivity {
         int duration2 = Toast.LENGTH_LONG;
         final Toast toast2 = Toast.makeText(context, text2, duration2);
 
-
+        // Firsttime getting the variables to put on the screen.
         libsleft = tempStory.getPlaceholderRemainingCount();
         libsleftstring = libsleft + " word(s) left";
         wordsleft.setText(libsleftstring);
         nextwordtype.setHint(tempStory.getNextPlaceholder());
 
+        // Function to get the user input to the story class.
+        // Also remove/add elements when the last word is given.
         nextwordtype.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,12 +94,15 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
+    // Code to go the the story screen.
     public void goToThirdScreen(View View) {
         Intent intent = new Intent(this, Main3Activity.class);
         intent.putExtra("finalStory", tempStory);
         startActivity(intent);
         finish();
     }
+
+    // Code to restore the element visibility for rotation.
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         button.setVisibility(savedInstanceState.getInt("Button Visibility"));
         nextwordtype.setVisibility(savedInstanceState.getInt("Wordtype Visibility"));
@@ -102,6 +110,8 @@ public class Main2Activity extends AppCompatActivity {
         button2.setVisibility(savedInstanceState.getInt("Button2 Visibility"));
         super.onRestoreInstanceState(savedInstanceState);
     }
+
+    // Code to save the element visibility for rotation.
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt("Button Visibility", button.getVisibility());
         savedInstanceState.putInt("Wordtype Visibility", nextwordtype.getVisibility());
