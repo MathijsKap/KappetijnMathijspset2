@@ -21,6 +21,7 @@ public class Main2Activity extends AppCompatActivity {
     TextView wordsleft;
     EditText nextwordtype;
     Button button, button2;
+    TextWatcher tw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class Main2Activity extends AppCompatActivity {
         CharSequence text2 = "That was the last one, click 'show story' for your story!";
         int duration2 = Toast.LENGTH_LONG;
         final Toast toast2 = Toast.makeText(context, text2, duration2);
+        CharSequence text3 = "Ohoo, you didn't fill in a word!";
+        final Toast toast3 = Toast.makeText(context, text3, duration);
 
         // Firsttime getting the variables to put on the screen.
         libsleft = tempStory.getPlaceholderRemainingCount();
@@ -53,10 +56,9 @@ public class Main2Activity extends AppCompatActivity {
 
         // Function to get the user input to the story class.
         // Also remove/add elements when the last word is given.
-        nextwordtype.addTextChangedListener(new TextWatcher() {
+        tw=new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
@@ -65,33 +67,38 @@ public class Main2Activity extends AppCompatActivity {
                 if (tempStory.getPlaceholderRemainingCount() > 1) {
                     button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            toast.show();
                             String text = nextwordtype.getText().toString();
-                            tempStory.fillInPlaceholder(text);
-                            nextwordtype.setText("");
-                            libsleft = tempStory.getPlaceholderRemainingCount();
-                            libsleftstring = libsleft + " word(s) left";
-                            wordsleft.setText(libsleftstring);
-                            nextwordtype.setHint(tempStory.getNextPlaceholder());
+                            if (text.length() >= 1) {
+                                toast.show();
+                                tempStory.fillInPlaceholder(text);
+                                nextwordtype.getText().clear();
+                                libsleft = tempStory.getPlaceholderRemainingCount();
+                                libsleftstring = libsleft + " word(s) left";
+                                wordsleft.setText(libsleftstring);
+                                nextwordtype.setHint(tempStory.getNextPlaceholder());
+                            } else {toast3.show();}
                         }
                     });
                 }
                 if (tempStory.getPlaceholderRemainingCount() == 1) {
                     button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
-                            toast2.show();
                             String text = nextwordtype.getText().toString();
-                            tempStory.fillInPlaceholder(text);
-                            nextwordtype.setText("");
-                            button2.setVisibility(View.VISIBLE);
-                            button.setVisibility(View.INVISIBLE);
-                            nextwordtype.setVisibility(View.INVISIBLE);
-                            wordsleft.setVisibility(View.INVISIBLE);
+                            if (text.length() >=1 ) {
+                                toast2.show();
+                                tempStory.fillInPlaceholder(text);
+                                nextwordtype.getText().clear();
+                                button2.setVisibility(View.VISIBLE);
+                                button.setVisibility(View.INVISIBLE);
+                                nextwordtype.setVisibility(View.INVISIBLE);
+                                wordsleft.setVisibility(View.INVISIBLE);
+                            } else {toast3.show();}
                         }
                     });
                 }
             }
-        });
+        };
+        nextwordtype.addTextChangedListener(tw);
     }
 
     // Code to go the the story screen.
